@@ -55,7 +55,7 @@ public class PasaLaCalculadora {
             finPartida = false;
 
             System.out.println("\nObjetivo máximo: " + objetivoMaximo);
-            System.out.println("¡Comienza la partida!\n");
+            System.out.println("Comienza la partida!\n");
 
             // BUCLE DE JUEGO
             while (!finPartida) {
@@ -82,7 +82,7 @@ public class PasaLaCalculadora {
                     System.out.println("Suma actual: " + sumaActual);
 
                     if (sumaActual >= objetivoMaximo) {
-                        System.out.println("¡" + jugador2 + " ha perdido!");
+                        System.out.println( jugador2 + " ha perdido!");
                         finPartida = true;
                         break;
                     }
@@ -97,7 +97,7 @@ public class PasaLaCalculadora {
                     System.out.println("Suma actual: " + sumaActual);
 
                     if (sumaActual >= objetivoMaximo) {
-                        System.out.println("¡" + jugador3 + " ha perdido!");
+                        System.out.println( jugador3 + " ha perdido");
                         finPartida = true;
                         break;
                     }
@@ -112,7 +112,7 @@ public class PasaLaCalculadora {
 
             if (respuesta.equalsIgnoreCase("n")) {
                 seguirJugando = false;
-                System.out.println("Gracias por jugar. ¡Hasta pronto!");
+                System.out.println("Gracias por jugar");
             } else {
                 System.out.println("\n--- Nueva partida ---\n");
             }
