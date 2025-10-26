@@ -1,19 +1,20 @@
 import java.util.Scanner;
-public class PasaLaCalculadora{
+
+public class PasaLaCalculadora {
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-        // VARIABLES BÁSICAS
-        int numeroJugadores;
-        String jugador1 = "";
-        String jugador2 = "";
-        String jugador3 = "";
-        int objetivoMaximo;
-        int sumaActual;
-        int numeroPrevio;
-        int numeroIntroducido;
+        // Variables
+        int numeroJugadores; // Guardara cuántos jugadores hay
+        String jugador1 = ""; //el nombre del jugador 1
+        String jugador2 = ""; //el nombre del jugador 2
+        String jugador3 = ""; //el nombre del jugador 3
+        int objetivoMaximo;   // numero al que no se puede llegar o pasar
+        int sumaActual;   // La suma total de los numeros que van poniendo
+        int numeroPrevio; //Guarda el número anterior para validar el siguiente
+        int numeroIntroducido; // Guarda el numero que introduce el jugador
         boolean finPartida = false;
         boolean seguirJugando = true;
 
@@ -23,8 +24,9 @@ public class PasaLaCalculadora{
         System.out.println("=====================================");
         mostrarInstrucciones();
 
-        // PEDIR NÚMERO DE JUGADORES
+        // PEDIR NUMERO DE JUGADORES
         numeroJugadores = obtenerNumeroJugadores(sc);
+        //llama funcion de pedir la cantidad de jugadores
 
         // PEDIR NOMBRES
         if (numeroJugadores == 1) {
@@ -116,11 +118,10 @@ public class PasaLaCalculadora{
             }
         }
 
-        // No cerramos el Scanner (forma básica)
     }
 
     // ===== FUNCIONES =====
-
+    // Muestra las reglas del juego por pantalla
     public static void mostrarInstrucciones() {
         System.out.println("Reglas del juego:");
         System.out.println("1. Cada jugador elige un número del 1 al 9.");
@@ -128,10 +129,11 @@ public class PasaLaCalculadora{
         System.out.println("3. Si la suma total alcanza o supera el objetivo, el jugador que lo hace pierde.\n");
     }
 
+    // Pide cuántos jugadores participaran
     public static int obtenerNumeroJugadores(Scanner sc) {
         int jugadores = 0;
         while (jugadores < 1 || jugadores > 3) {
-            System.out.print("¿Cuántos jugadores participarán? (1-3): ");
+            System.out.print("¿Cuantos jugadores participaran? (1-3): ");
             while (!sc.hasNextInt()) {
                 System.out.println("Entrada no válida. Escribe un número.");
                 sc.next();
@@ -145,23 +147,25 @@ public class PasaLaCalculadora{
         return jugadores;
     }
 
+    // Pide al usuario el número objetivo entre 10 y 99
     public static int obtenerObjetivoMaximo(Scanner sc) {
         int objetivo = 0;
         while (objetivo < 10 || objetivo > 99) {
-            System.out.print("Introduce el número objetivo (10-99): ");
+            System.out.print("Introduce el numero objetivo (10-99): ");
             while (!sc.hasNextInt()) {
-                System.out.println("Entrada no válida.");
+                System.out.println("Entrada no valida.");
                 sc.next();
             }
             objetivo = sc.nextInt();
-            sc.nextLine();
-            if (objetivo < 11 || objetivo > 98) {
-                System.out.println("Debe ser entre 11 y 98.");
+            sc.nextLine();// limpiar salto de línea
+            if (objetivo < 10 || objetivo > 99) {
+                System.out.println("Debe ser entre 10 y 99.");
             }
         }
         return objetivo;
     }
 
+    // Comprueba que el número introducido cumpla las reglas del juego
     public static int validarNumero(Scanner sc, int numeroPrevio) {
         int num = 0;
         boolean valido = false;
@@ -176,22 +180,21 @@ public class PasaLaCalculadora{
             sc.nextLine();
 
             if (num < 1 || num > 9) {
-                System.out.println("Número fuera de rango.");
+                System.out.println("Numero fuera de rango.");
             } else if (numeroPrevio == 0) {
                 valido = true;
             } else if (num == numeroPrevio) {
-                System.out.println("No puedes repetir el mismo número.");
+                System.out.println("No puedes repetir el mismo numero.");
             } else if (mismaFila(numeroPrevio, num) || mismaColumna(numeroPrevio, num)) {
                 valido = true;
             } else {
                 System.out.println("Debe estar en la misma fila o columna que el número anterior.");
             }
         }
-        return num;
+        return num; // Devuelve el numero válido
     }
-
+    //Comprueba si los dos numeros están en la misma fila del teclado
     public static boolean mismaFila(int a, int b) {
-        // Sin arrays, usando comparaciones simples
         if ((a >= 1 && a <= 3 && b >= 1 && b <= 3) ||
                 (a >= 4 && a <= 6 && b >= 4 && b <= 6) ||
                 (a >= 7 && a <= 9 && b >= 7 && b <= 9)) {
@@ -201,6 +204,7 @@ public class PasaLaCalculadora{
         }
     }
 
+    // Comprueba si los dos números están en la misma fila del teclado
     public static boolean mismaColumna(int a, int b) {
 
         if ((a == 1 || a == 4 || a == 7) && (b == 1 || b == 4 || b == 7)) return true;
